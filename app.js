@@ -1,4 +1,5 @@
 require('dotenv').config()
+
 const express = require('express')
 const connectToDB = require('./config/db.js')
 const cors = require('cors') // import the cors middleware
@@ -16,16 +17,9 @@ app.use(cors())
 // init connection to DB
 connectToDB()
 
-app.get('/', (req, res) => {
-    res.send("Welcome")
-})
+const userRoutes = require('./routes/user.route.js')
 
-app.get('/home', (req, res) => {
-    res.send("Home")
-})
+app.use('/', userRoutes)
 
-app.get('/about', (req, res) => {
-    res.send("About")
-})
 
 module.exports = app
